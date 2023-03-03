@@ -2,9 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
-const pokemonList = require("../../assets/kanto.json")
+import { styles } from './Pokedex.styles';
+import { callListAPI } from '../connections/getters'
+import { usePokemonList } from './Pokedex.hook'
+
 
 type ItemProps = {title: string, navigation: any};
+type PokemonList = {name: string, url: string};
  
 const Item = ({title, navigation}: ItemProps, ) => (
   <Button  
@@ -16,18 +20,8 @@ const Item = ({title, navigation}: ItemProps, ) => (
 
 
 export default function Pokedex({navigation}) {
-  const [pokemonList, setPokemonList] = useState({});
-
-  useEffect(() => {
-    const callAPI = async () => {
-      try {
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=898")
-        const responseJson = await response.json()
-        setPokemonList(responseJson.results)
-      } catch(e) {console.log(e)}
-    }
-    callAPI()
-  }, [setPokemonList])
+  const [pokemonList, setPokemonList] = useState<PokemonList[]>();
+  usePokemonList(setPokemonList)
 
   return (
     <View style={styles.container}>
@@ -42,22 +36,3 @@ export default function Pokedex({navigation}) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    justifyContent: 'center',
-  },
-  flatList: {
-  },
-  item: {
-    flex: 1,
-    backgroundColor: '#6f7bbd',
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});
