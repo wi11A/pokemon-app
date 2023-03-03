@@ -1,9 +1,7 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
+import { View, FlatList, Button } from 'react-native';
 import React, { useState, useEffect } from 'react';
 
 import { styles } from './Pokedex.styles';
-import { callListAPI } from '../connections/getters'
 import { usePokemonList } from './Pokedex.hook'
 
 
