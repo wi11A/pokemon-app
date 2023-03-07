@@ -5,17 +5,9 @@ export const callDetailsAPI = async (name) => {
     } catch(error) {console.log(error)}
 }
 
-
-export const callListAPI = async () => {
-  try {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=898")
-    return await response.json()
-  } catch(error) {console.log(error)}
-}
-
-export const callListAPI2 = async ({offset = 0}) => {
+export const callListAPI = async (url="") => {
     try {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=50&offset=" + offset)
+      const response = await fetch(url)
       return await response.json()
     } catch(error) {console.log(error)}
   }
