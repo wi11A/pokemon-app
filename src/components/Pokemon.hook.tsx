@@ -34,11 +34,14 @@ export function usePanAnimation() {
       PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
         onPanResponderMove: (e, gestureState) => {
-          if(gestureState.dy > 0)
+          if(gestureState.dy > 0) {
+            // On y scroll, pan stats container 
             Animated.event([null, {dy: pan.y}], {useNativeDriver: false})(e, gestureState)
-          if(gestureState.dy > 0 && gestureState.dy < 60)
-            Animated.event([null, {dy: scale}], {useNativeDriver: false})(e, gestureState)
-         },
+            // On y scroll, scale pokemon image up to a point
+            if(gestureState.dy < 60) {
+              Animated.event([null, {dy: scale}], {useNativeDriver: false})(e, gestureState)
+            }}
+        },
         onPanResponderRelease: () => {
           Animated.parallel([
             Animated.spring(pan, {

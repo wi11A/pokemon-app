@@ -32,7 +32,7 @@ export default function Pokemon({route, navigation}) {
                   onLoad = {animateImage( fadeAnim, translateAnim)}
                   source={{
                     uri: pokemonDetails.image}}
-                  style={[styles.image, 
+                    style={[styles.image, 
                           {opacity: fadeAnim, 
                            transform : [{translateY: translateAnim},
                                         {scaleX: scale.interpolate({
@@ -43,8 +43,8 @@ export default function Pokemon({route, navigation}) {
                                             inputRange: [0, 1],
                                             outputRange: [1, 1.008]
                                         })}
-                            ]}
-                        ]}
+                          ]}
+                    ]}
               />
             </View>
             <Animated.View         
